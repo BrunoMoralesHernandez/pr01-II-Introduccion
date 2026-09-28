@@ -1,29 +1,72 @@
+/**
+ * Universidad de La Laguna
+ * Escuela Superior de Ingeniería y Tecnología
+ * Grado en Ingeniería Informática
+ * Interfaces Inteligentes 2026-2027
+ * 4º Año de Carrera
+ * Ejercicio 4: Scripts de Movimiento 
+ *
+ * @author Bruno Morales Hernandez alu0101664309@ull.edu.es
+ * @brief Script asociado a la esfera que localiza el cubo y el cilindro en la escena
+ * y calcula la distancia euclídea hasta cada uno de ellos.
+ * @date Sep 28 2026
+ * @version 1.0
+ */
+
 using UnityEngine;
 
 public class DistanceTracker : MonoBehaviour
 {
-  void Start()
+  private GameObject _cubo;
+  private GameObject _cilindro;
+
+  public float distanciaAlCubo;
+  public float distanciaAlCilindro;
+
+  public void Start()
   {
-    // Buscamos los objetos en la escena por su Tag o Nombre
-    GameObject cubeObj = GameObject.FindWithTag("Cube");
-    GameObject cylinderObj = GameObject.FindWithTag("Cylinder");
+    BuscarObjetos();
+    CalcularDistancias();
+    MostrarDistancias();
+  }
 
-    // Si prefieres buscar directamente por el nombre del GameObject en la jerarquía:
-    if (cubeObj == null) cubeObj = GameObject.Find("Cube");
-    if (cylinderObj == null) cylinderObj = GameObject.Find("Cylinder");
-
-    // Comprobamos que existan para evitar errores de referencia nula (NullReferenceException)
-    if (cubeObj != null && cylinderObj != null)
+  public void BuscarObjetos()
+  {
+    _cubo = GameObject.FindWithTag("Cube");
+    if (_cubo == null)
     {
-      float distanceToCube = Vector3.Distance(transform.position, cubeObj.transform.position);
-      float distanceToCylinder = Vector3.Distance(transform.position, cylinderObj.transform.position);
+      _cubo = GameObject.Find("Cube");
+    }
+    _cilindro = GameObject.FindWithTag("Cylinder");
+    if (_cilindro == null)
+    {
+      _cilindro = GameObject.Find("Cylinder");
+    }
+  }
 
-      Debug.Log($"Distancia de la esfera al Cubo: {distanceToCube:F2} unidades");
-      Debug.Log($"Distancia de la esfera al Cilindro: {distanceToCylinder:F2} unidades");
+  public void CalcularDistancias()
+  {
+    if (_cubo != null)
+    {
+      distanciaAlCubo = Vector3.Distance(transform.position, _cubo.transform.position);
+    }
+
+    if (_cilindro != null)
+    {
+      distanciaAlCilindro = Vector3.Distance(transform.position, _cilindro.transform.position);
+    }
+  }
+
+  public void MostrarDistancias()
+  {
+    if (_cubo != null && _cilindro != null)
+    {
+      Debug.Log("Distancia de la esfera al Cubo: " + distanciaAlCubo);
+      Debug.Log("Distancia de la esfera al Cilindro: " + distanciaAlCilindro);
     }
     else
     {
-      Debug.LogWarning("No se encontró el Cubo o el Cilindro en la escena. Comprueba sus nombres o etiquetas.");
+      Debug.LogWarning("No se encontro el Cubo o el Cilindro. Comprueba sus nombres o etiquetas en la jerarquia.");
     }
   }
 }
