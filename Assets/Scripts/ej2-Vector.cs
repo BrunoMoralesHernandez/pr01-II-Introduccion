@@ -12,6 +12,7 @@
  * @date Sep 28 2026
  * @version 1.0
  */
+ 
 using UnityEngine;
 
 public class prueba : MonoBehaviour
