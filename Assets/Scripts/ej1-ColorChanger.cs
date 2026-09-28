@@ -1,43 +1,61 @@
 /**
-*/
+ * Universidad de La Laguna
+ * Escuela Superior de Ingeniería y Tecnología
+ * Grado en Ingeniería Informática
+ * Interfaces Inteligentes 2026-2027
+ * 4º Año de Carrera
+ * Ejercicio 1: Introducción C# 
+ *
+ * @author Bruno Morales Hernandez alu0101664309@ull.edu.es
+ * @brief Primer ejercicio de la hoja de problemas. Script para cambiar
+ * el color de un objeto de la escena
+ * @date Sep 28 2026
+ * @version 1.0
+ */
 
-using System.Runtime.Versioning;
 using UnityEngine;
 
-public class ColorChanger : MonoBehaviour
+public class ColorChanger : MonoBehaviour 
 {
-  public int IntervaloFrames = 120;
-
+  // Atributos
+  [SerializeField] private int _intervaloFrames = 120;
   private float[] color = new float[3];
-  private Renderer objeto;
+  private Renderer actualObject;
   private int frameCounter = 0;
 
-  void Start()
+  /*
+   * Metodo start. Lee el comenente y ejecuta el cambio de color
+   */
+  void Start() 
   {
-    objeto = GetComponent<Renderer>();
+    actualObject = GetComponent<Renderer>();
     ApplyColor();
   }
 
-  void Update()
+  /*
+   * Metodo Update. En cada frame revisa si ya ha pasado el numero de frames
+   * establecido para cambiar de color. En dicho caso, cambia el color y 
+   * reestablece el contador.
+  */
+  void Update() 
   {
     frameCounter++;
 
-    // Al alcanzar la cantidad de frames configurada
-    if (frameCounter >= IntervaloFrames)
-    {
-      // Elegimos un canal aleatorio (0, 1 o 2) y cambiamos su valor
+    if (frameCounter >= _intervaloFrames) {
       int randomChannel = Random.Range(0, 3);
       color[randomChannel] = Random.value;
-
       ApplyColor();
-      frameCounter = 0; // Reiniciamos el contador
+      frameCounter = 0;
     }
   }
 
-  void ApplyColor()
+  /*
+   * Metoda para hacer el cambio de color. Crea un color a partir del atributo
+   * color de la clase y se lo asigna al objeto
+   */
+  void ApplyColor() 
   {
-    // El cuarto parámetro es el canal Alfa (opacidad = 1.0f)
     Color newColor = new Color(color[0], color[1], color[2], 1.0f);
-    objeto.material.color = newColor;
+    actualObject.material.color = newColor;
   }
 }
