@@ -32,16 +32,8 @@ public class DistanceTracker : MonoBehaviour
 
   public void BuscarObjetos()
   {
-    _cubo = GameObject.FindWithTag("Cube");
-    if (_cubo == null)
-    {
-      _cubo = GameObject.Find("Cube");
-    }
-    _cilindro = GameObject.FindWithTag("Cylinder");
-    if (_cilindro == null)
-    {
-      _cilindro = GameObject.Find("Cylinder");
-    }
+    _cubo = GameObject.Find("Cube");
+    _cilindro = GameObject.Find("Cylinder");
   }
 
   public void CalcularDistancias()
