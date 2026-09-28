@@ -15,7 +15,7 @@
  
 using UnityEngine;
 
-public class prueba : MonoBehaviour
+public class OperacionVector3 : MonoBehaviour
 {
   // Vectores que se pide inicializar
   public Vector3 vector1 = new Vector3();
