@@ -1,47 +1,72 @@
+/**
+ * Universidad de La Laguna
+ * Escuela Superior de Ingeniería y Tecnología
+ * Grado en Ingeniería Informática
+ * Interfaces Inteligentes 2026-2027
+ * 4º Año de Carrera
+ * Ejercicio 2: Introducción C# 
+ *
+ * @author Bruno Morales Hernandez alu0101664309@ull.edu.es
+ * @brief Segundo ejercicio de la hoja de problemas. Script para mostrar
+ * diferentes datos sobre una esfera.
+ * @date Sep 28 2026
+ * @version 1.0
+ */
 using UnityEngine;
 
-public class VectorInspectorOps : MonoBehaviour
+public class prueba : MonoBehaviour
 {
-  [Header("Configuración de Vectores")]
-  public Vector3 vectorA = new Vector3(0.0f, 1.0f, 0.0f);
-  public Vector3 vectorB = new Vector3(1.0f, 2.0f, 0.0f);
+  // Vectores que se pide inicializar
+  public Vector3 vector1 = new Vector3();
+  public Vector3 vector2 = new Vector3();
 
-  [Header("Resultados (Solo lectura)")]
-  public float magnitudeA;
-  public float magnitudeB;
-  public float angleBetween;
-  public float distanceBetween;
-  public string higherVector;
+  // Atributos para almacenar cada una de las variables
+  public float magnitude1;
+  public float magnitude2;
+  public float angle;
+  public float distance;
+  public string masAlto;
 
-  void Start()
+  /*
+   * Metoda start. Llama a metodos aux
+   */
+  public void Start()
   {
-    // a. Magnitudes
-    magnitudeA = vectorA.magnitude;
-    magnitudeB = vectorB.magnitude;
-    Debug.Log($"Magnitud Vector A: {magnitudeA} | Magnitud Vector B: {magnitudeB}");
+    GuardarInformacion();
+    MostrarInformacion();
+  }
 
-    // b. Ángulo entre ambos
-    angleBetween = Vector3.Angle(vectorA, vectorB);
-    Debug.Log($"Ángulo entre A y B: {angleBetween}°");
-
-    // c. Distancia entre ambos
-    distanceBetween = Vector3.Distance(vectorA, vectorB);
-    Debug.Log($"Distancia entre A y B: {distanceBetween}");
-
-    // d. Cuál está a mayor altura (eje Y)
-    if (vectorA.y > vectorB.y)
+  /*
+   * Metodo para inicializar los atributos
+   */
+  public void GuardarInformacion()
+  {
+    magnitude1 = vector1.magnitude;
+    magnitude2 = vector2.magnitude;
+    angle = Vector3.Angle(vector1, vector2);
+    distance = Vector3.Distance(vector1, vector2);
+    if (vector1.y > vector2.y)
     {
-        higherVector = "El Vector A está a mayor altura.";
+        masAlto = "Vector 1 está más alto";
     }
-    else if (vectorB.y > vectorA.y)
+    else if (vector2.y > vector1.y)
     {
-        higherVector = "El Vector B está a mayor altura.";
+        masAlto = "Vector 2 está más alto";
     }
     else
     {
-        higherVector = "Ambos vectores están a la misma altura.";
+        masAlto = "Ambos vectores están a la misma altura";
     }
+  }
 
-    Debug.Log(higherVector);
+  /*
+   * Metodo para mostrar atributos
+   */
+  public void MostrarInformacion()
+  {
+    Debug.Log("Magnitud de cada vector. Vec1 = " + magnitude1 + ". Vec2 = " + magnitude2);
+    Debug.Log("Angulo que forman los vectores = " + angle);
+    Debug.Log("Distancia entre vectores = " + distance);
+    Debug.Log("Vector mayor altura: " + masAlto);
   }
 }
